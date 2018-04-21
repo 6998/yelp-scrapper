@@ -3,8 +3,8 @@ if (!process.env.ENV) // make sure we have env params
   dotenv.config()
 
 const yelpResults = require('./yelpResults')
-const saveFunc = require('./saveResult')
 
+const saveFunc = require('./saveResult')
 const categories = ['chinese, All', 'pizza, All', 'italian, All', 'mexican, All', 'tradamerican']
 
 const async = require('async');
@@ -20,19 +20,18 @@ const main = () => {
       console.log("savedCounter:", savedCounter);
     }
   });
-  // Place.scan({NumberOfReviews:3}, function(err, place) {
-  //   if(err) { return console.log(err.message); }
-  //   console.log(place);
-  // });
 }
 
 
 const scrape = (cb) => {
-  async.each(categories, (cat, callback) => {
+  async.eachSeries(categories, (cat, callback) => {
+    console.log(`scrape ${cat}`)
     yelpResults(cat, (arr) => {
-      save(arr, (err)=>{
-        return callback(err);
-      })
+      console.log("return ", arr.length)
+      callback();
+      // save(arr, (err)=>{
+      //   return callback(err);
+      // })
     });
   }, (err) => {
     return cb(err)
