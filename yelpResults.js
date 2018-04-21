@@ -11,19 +11,18 @@ const yelp = Yelp.client(process.env.YELP);
 const location = 'new york city, ny';
 
 const fetch = async (cat, callback) =>{
-  console.log("starting to look for", cat)
+  console.log(" -- starting to look for", cat)
   let result = [];
   let offset = 0;
 
-  while (offset < 1000) {
-    console.log("offset:", offset)
-
+  while (offset < 50) {
+    console.log(" --- offset:", offset)
     let res = await yelp.search({
       location,
       offset,
       categories: cat,
       limit: 50
-    })
+    });
 
     const json = res.jsonBody;
     result = result.concat(json.businesses)
