@@ -12,7 +12,7 @@ var dynamoose = require('dynamoose');
 var Cat = dynamoose.model('Cat', { id: Number, name: String });
 
 // This will create a new instance of our "Cat" model, with the `id` as 666, and `name` as 'Garfield'
-var garfield = new Cat({id: 666, name: 'Garfield'});
+var garfield = new Cat({id: 667, name: 'Garfield'});
 
 // This will save our new object to DynamoDB (remember this happens asynchronously, so you need to be sure to wait before trying to access the object)
 garfield.save();
