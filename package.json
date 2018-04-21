@@ -10,6 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^5.0.1",
+<<<<<<< HEAD
+    "yelp": "^1.0.2",
+    "yelp-fusion": "^2.0.3"
+=======
     "dynamoose": "^0.8.7"
+>>>>>>> 3a65375380f0b22fa9c66f9f2a1e0765e29f2c09
   }
 }
