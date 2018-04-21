@@ -2,43 +2,24 @@ const dotenv = require('dotenv')
 if (!process.env.ENV) // make sure we have env params
   dotenv.config()
 
-const Yelp = require('yelp-fusion');
-const yelp = Yelp.client(process.env.YELP);
+const yelpResults = require('./yelpResults')
+const saveFunc = require('./saveResult')
 
 const categories = ['chinese, All', 'pizza, All', 'italian, All', 'mexican, All', 'tradamerican']
-const Place = require('./PlaceSchema');
 
 const async = require('async');
 
-const yelpResults = require('./yelpResults')
-
+let savedCounter = 0;
 const main = () => {
   console.log("=============start=============")
-  scrape((results)=>{
-    console.log(results)
+  scrape((err) => {
+    if(err) {
+      console.log(err)
+    } else {
+      console.log("done without errors");
+      console.log("savedCounter:", savedCounter);
+    }
   });
-
-  // Place.create({
-  //   Rating: 123,
-  //   NumberOfReviews: 123,
-  //   Recommended: 13,
-  //   RestaurantId: "test",
-  //   Cuisine: "test"
-  // }, function (err, odie) {
-  //   if (err) {
-  //     return console.log(err);
-  //   } else {
-  //     console.log("Saved")
-  //   }
-  // })
-
-  // Place.get({RestaurantId: "test"}).then(function (place) {
-  //   if (place)
-  //     console.log(place)
-  // }).catch(e => {
-  //   console.log(e)
-  // });
-
   // Place.scan({NumberOfReviews:3}, function(err, place) {
   //   if(err) { return console.log(err.message); }
   //   console.log(place);
@@ -47,21 +28,31 @@ const main = () => {
 
 
 const scrape = (cb) => {
-  async.each(categories, (cat, callback)=>{
-    yelpResults(cat, (arr)=>{
-      callback(null);
+  async.each(categories, (cat, callback) => {
+    yelpResults(cat, (arr) => {
+      save(arr, (err)=>{
+        return callback(err);
+      })
     });
-  }, (err)=>{
-    cb("done")
+  }, (err) => {
+    return cb(err)
   })
-}
+};
 
-const samePlaces = () => {
+const save = (arr, callback) => {
+  async.each(arr, (item, cb)=>{
+    saveFunc(item, (err)=>{
+      if(err) {
+        console.log("error saving!!!")
+      } else {
+        savedCounter++;
+      }
+      return cb(err)
+    })
+  }, (err)=>{
+    return callback(err);
+  })
+};
 
-}
-
-const sameRandomPlacesToCSV = () => {
-
-}
 
 main()

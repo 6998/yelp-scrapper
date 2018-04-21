@@ -1,24 +1,24 @@
 
 
 const fetch = (cat, callback) =>{
-  let resultsArray = [cat];
-
   // James's magic ( yelp )
 
 
 
 
-
-
-
-
-
+  const fake = {
+    Rating: (Math.random() * 5) ,
+    NumberOfReviews: Math.random(),
+    Recommended: 12313,
+    RestaurantId: "test",
+    Cuisine: cat
+  }
 
 
 
 
   // array of businesses to
-  return callback(resultsArray);
+  return callback([fake]);
 }
 
 module.exports =  fetch
