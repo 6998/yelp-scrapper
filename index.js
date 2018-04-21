@@ -2,12 +2,11 @@ const dotenv = require('dotenv')
 if (!process.env.ENV) // make sure we have env params
   dotenv.config()
 
-const Yelp = require('yelp-fusion');
 const yelp = Yelp.client(process.env.YELP);
 
+const Yelp = require('yelp-fusion');
 const categories = ['chinese, All', 'pizza, All', 'italian, All', 'mexican, All', 'tradamerican']
 const Place = require('./PlaceSchema');
-
 const async = require('async');
 
 const yelpResults = require('./yelpResults')
@@ -48,7 +47,7 @@ const main = () => {
 
 const scrape = (cb) => {
   async.each(categories, (cat, callback)=>{
-    yelpResults(cat, (arr)=>{
+    yelpResults(cat, (arr) => {
       callback(null);
     });
   }, (err)=>{
