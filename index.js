@@ -24,18 +24,12 @@ const main = () => {
 
 
 const scrape = (cb) => {
-  async.eachSeries(categories, (cat, callback) => {
-    console.log(`scrape ${cat}`)
-    yelpResults(cat, (arr) => {
-      console.log("return ", arr.length)
-      callback();
-      // save(arr, (err)=>{
-      //   return callback(err);
-      // })
+  categories.forEach(async cat => {
+    await yelpResults(cat, (arr) => {
+      console.log(cat)
+      console.log(arr.splice(0,3))
     });
-  }, (err) => {
-    return cb(err)
-  })
+  });
 };
 
 const save = (arr, callback) => {

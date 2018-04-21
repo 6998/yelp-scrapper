@@ -17,6 +17,7 @@ const fetch = async (cat, callback) =>{
 
   while (offset < 1000) {
     console.log("offset:", offset)
+
     let res = await yelp.search({
       location,
       offset,
@@ -27,14 +28,15 @@ const fetch = async (cat, callback) =>{
     const json = res.jsonBody;
     result = result.concat(json.businesses)
     offset += 50;
+    break;
   }
 
-  // console.log(result);
-  // console.log(result.length);
+  //console.log(result);
+  //console.log(result.length);
 
   return callback(result);
 }
 
-// fetch('mexican, All', () => {})
+//fetch('mexican, All', () => {})
 
 module.exports = fetch
