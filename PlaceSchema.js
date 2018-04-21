@@ -14,12 +14,12 @@ const Place = dynamoose.model('Place', {
   Rating: Number,
   NumberOfReviews: Number,
   Recommended: Number,
-  RestaurantId:  { type: String , hashKey: true },
+  RestaurantId:  { type: String },
   Cuisine: String,
-	Name: String,
+	Name: {type: String },
 	Address: String,
 	Coordinates:  {latitude: Number, longitude: Number},
 	ZipCode: String
-});
+}, { update: false });
 
 module.exports =  Place

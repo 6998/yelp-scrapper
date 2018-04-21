@@ -2,12 +2,16 @@ const dotenv = require('dotenv')
 if (!process.env.ENV) // make sure we have env params
   dotenv.config()
 
+const _ = require("lodash");
+
 const yelpResults = require('./yelpResults')
 
 const saveFunc = require('./saveResult')
 const categories = ['chinese, All', 'pizza, All', 'italian, All', 'mexican, All', 'tradamerican']
 
 const async = require('async');
+
+let allplaces = [];
 
 let savedCounter = 0;
 const main = () => {
@@ -27,7 +31,6 @@ const scrape = (cb) => {
   async.eachSeries(categories, (cat, callback) => {
     console.log(` - scrape ${cat}`)
     yelpResults(cat, (arr) => {
-      console.log(" ---- return ", arr.length)
       save(arr, cat, (err)=>{
         console.log(" ----- savedCounter:", savedCounter);
         return callback(err);

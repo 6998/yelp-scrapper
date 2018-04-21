@@ -15,12 +15,12 @@ const fetch = async (cat, callback) =>{
   let result = [];
   let offset = 0;
 
-  while (offset < 100) {
+  while (offset < 50) {
     console.log(" --- offset:", offset)
     let res = await yelp.search({
       location,
       offset,
-      categories: `cat`,
+      categories: cat,
       limit: 50
     });
 

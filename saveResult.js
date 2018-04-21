@@ -14,7 +14,8 @@ const save = (item, category, cb)=> {
     Name: item.name,
     Address: address,
     Coordinates: item.coordinates,
-    ZipCode: item.location.zip_code
+    ZipCode: item.location.zip_code,
+    id: item.id
   });
 
 
