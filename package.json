@@ -9,12 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.0",
     "dotenv": "^5.0.1",
-<<<<<<< HEAD
+    "dynamoose": "^0.8.7",
     "yelp": "^1.0.2",
     "yelp-fusion": "^2.0.3"
-=======
-    "dynamoose": "^0.8.7"
->>>>>>> 3a65375380f0b22fa9c66f9f2a1e0765e29f2c09
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
   }
 }
