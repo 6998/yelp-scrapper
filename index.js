@@ -6,10 +6,17 @@ const Yelp = require('yelp-fusion');
 const yelp = Yelp.client(process.env.YELP);
 
 const categories = ['chinese, All', 'pizza, All', 'italian, All', 'mexican, All', 'tradamerican']
-const Place = require('./PlaceSchema')
+const Place = require('./PlaceSchema');
+
+const async = require('async');
+
+const yelpResults = require('./yelpResults')
 
 const main = () => {
   console.log("=============start=============")
+  scrape((results)=>{
+    console.log(results)
+  });
 
   // Place.create({
   //   Rating: 123,
@@ -32,23 +39,21 @@ const main = () => {
   //   console.log(e)
   // });
 
-  Place.scan({NumberOfReviews:3}, function(err, place) {
-    if(err) { return console.log(err.message); }
-    console.log(place);
-  });
+  // Place.scan({NumberOfReviews:3}, function(err, place) {
+  //   if(err) { return console.log(err.message); }
+  //   console.log(place);
+  // });
 }
 
 
-const scarpPlaces = () => {
-  yelp.search({
-    term: 'Four Barrel Coffee',
-    location: 'san francisco, ca'
-  }).then(response => {
-    json = response.jsonBody;
-    console.log(response.jsonBody);
-  }).catch(e => {
-    console.log(e);
-  });
+const scrape = (cb) => {
+  async.each(categories, (cat, callback)=>{
+    yelpResults(cat, (arr)=>{
+      callback(null);
+    });
+  }, (err)=>{
+    cb("done")
+  })
 }
 
 const samePlaces = () => {
