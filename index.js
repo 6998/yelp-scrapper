@@ -25,22 +25,22 @@ const main = () => {
 
 const scrape = (cb) => {
   async.eachSeries(categories, (cat, callback) => {
-    console.log(`scrape ${cat}`)
+    console.log(` - scrape ${cat}`)
     yelpResults(cat, (arr) => {
-      console.log("return ", arr.length)
-      callback();
-      // save(arr, (err)=>{
-      //   return callback(err);
-      // })
+      console.log(" ---- return ", arr.length)
+      save(arr, cat, (err)=>{
+        console.log(" ----- savedCounter:", savedCounter);
+        return callback(err);
+      })
     });
   }, (err) => {
     return cb(err)
   })
 };
 
-const save = (arr, callback) => {
-  async.each(arr, (item, cb)=>{
-    saveFunc(item, (err)=>{
+const save = (arr, cat, callback) => {
+  async.eachSeries(arr, (item, cb)=>{
+    saveFunc(item, cat, (err)=>{
       if(err) {
         console.log("error saving!!!")
       } else {
