@@ -1,6 +1,6 @@
 const Place = require('./PlaceSchema');
 
-const save = async (item, category) => {
+const save = async (id, item, category) => {
   let address = "";
 
   if(item.location.address1)
@@ -10,7 +10,7 @@ const save = async (item, category) => {
     address += item.location.address2;
 
   const place = new Place({
-    id: item.id,
+    id: id,
     Name: item.name,
     RestaurantId: item.id,
     Recommended: 1,
@@ -22,8 +22,8 @@ const save = async (item, category) => {
     Cuisine: category,
   });
 
-  place.save(err => { if (err){ console.error(err); }})
-  console.log('saved')
+  await place.save()
+  console.log(`save ${place.id}`)
 }
 
 module.exports = save

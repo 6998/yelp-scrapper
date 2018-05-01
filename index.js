@@ -12,9 +12,7 @@ const categories = ['chinese, All', 'pizza, All', 'italian, All', 'mexican, All'
 let allplaces = [];
 let savedCounter = 0;
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
 const main = async () => {
   console.log("=============start=============")
@@ -35,15 +33,14 @@ const scrape = async () => {
 
     console.log(`fetch returned ${arr.length} results`)
     console.log('')
-
-    break;
   }
 };
 
+id = 1
 const save = async (arr, cat) => {
-  for (let biz of arr) {
-    await saveFunc(biz, cat);
-    break;
+  for (let b of arr) {
+    await saveFunc(id++, b, cat);
+    await sleep(200)
   }
 };
 

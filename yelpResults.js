@@ -14,7 +14,7 @@ const fetch = async cat => {
   let result = [];
   let offset = 0;
 
-  while (offset < 50) {
+  while (offset < 100) {
     console.log(`\toffset: ${offset}`)
 
     let res = await yelp.search({
