@@ -7,16 +7,17 @@ if (!process.env.ENV) // make sure we have env params
   dotenv.config()
 
 const yelp = Yelp.client(process.env.YELP);
-
 const location = 'new york city, ny';
 
-const fetch = async (cat, callback) =>{
-  console.log(" -- starting to look for", cat)
+const fetch = async cat => {
+  console.log(`\tfetch [${cat}]`)
   let result = [];
   let offset = 0;
 
   while (offset < 50) {
-    console.log(" --- offset:", offset)
+    console.log(`\toffset: ${offset}`)
+
+    /*
     let res = await yelp.search({
       location,
       offset,
@@ -27,13 +28,14 @@ const fetch = async (cat, callback) =>{
     const json = res.jsonBody;
     result = result.concat(json.businesses)
     offset += 50;
+    */
     break;
   }
 
   //console.log(result);
   //console.log(result.length);
 
-  return callback(result);
+  return result;
 }
 
 //fetch('mexican, All', () => {})

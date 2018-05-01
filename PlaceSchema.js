@@ -2,9 +2,10 @@
 const dotenv = require('dotenv')
 if(!process.env.ENV) // make sure we have env params
 	dotenv.config()
-var shortId = require('shortid');
 
+const shortId = require('shortid');
 const dynamoose = require('dynamoose');
+
 const Place = dynamoose.model('Place', {
   id: {
     type: String,
@@ -18,7 +19,7 @@ const Place = dynamoose.model('Place', {
   Cuisine: String,
 	Name: {type: String },
 	Address: String,
-	Coordinates:  {latitude: Number, longitude: Number},
+	Coordinates:  { latitude: Number, longitude: Number},
 	ZipCode: String
 }, { update: false });
 

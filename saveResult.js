@@ -1,5 +1,6 @@
 const Place = require('./PlaceSchema');
-const save = (item, category, cb)=> {
+const save = (item, category, cb) => {
+
   let address = "";
   if(item.location.address1)
     address += item.location.address1;
@@ -17,7 +18,6 @@ const save = (item, category, cb)=> {
     ZipCode: item.location.zip_code,
     id: item.id
   });
-
 
   place.save(function (err, p) {
     if (err) {
