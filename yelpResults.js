@@ -17,7 +17,6 @@ const fetch = async cat => {
   while (offset < 50) {
     console.log(`\toffset: ${offset}`)
 
-    /*
     let res = await yelp.search({
       location,
       offset,
@@ -28,11 +27,11 @@ const fetch = async cat => {
     const json = res.jsonBody;
     result = result.concat(json.businesses)
     offset += 50;
-    */
+    
     break;
   }
 
-  //console.log(result);
+  console.log(result);
   //console.log(result.length);
 
   return result;

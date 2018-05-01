@@ -1,6 +1,6 @@
 const Place = require('./PlaceSchema');
-const save = (item, category, cb) => {
 
+const save = (item, category, cb) => {
   let address = "";
   if(item.location.address1)
     address += item.location.address1;

@@ -18,7 +18,6 @@ function sleep(ms) {
 
 const main = async () => {
   console.log("=============start=============")
-
   await scrape()
   console.log("savedCounter:", savedCounter);
 }
@@ -26,26 +25,26 @@ const main = async () => {
 let res = []
 
 const scrape = async () => {
-  async.eachSeries(categories, async cat => {
+  for (let cat of categories) {
     console.log(`SCRAPE [${cat}]`);
+
     arr = await yelpResults(cat);
-    console.log(`returned ${arr.length} results`)
-
     res = res.concat(arr.map(x => x.id));
+
     await sleep(500);
+    //await save(arr, cat);
 
+    console.log(`fetch returned ${arr.length} results`)
     console.log('')
-
-    await save(arr, cat);
-    break
-  });
+    
+    break;
+  }
 };
 
 const save = async (arr, cat) => {
-  async.eachSeries(arr, async biz => {
-    saveFunc(item, cat, (err)=>{
-        savedCounter++;
-  })
+  for (let biz of arr) {
+    saveFunc(item, cat);
+  }
 };
 
 main()
