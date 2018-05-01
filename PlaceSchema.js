@@ -3,24 +3,19 @@ const dotenv = require('dotenv')
 if(!process.env.ENV) // make sure we have env params
 	dotenv.config()
 
-const shortId = require('shortid');
 const dynamoose = require('dynamoose');
 
-const Place = dynamoose.model('Place', {
-  id: {
-    type: String,
-    hashKey: true,
-    default: shortId.generate
-  },
+const Place = dynamoose.model('yelp-restaurants', {
+  id: String,
+	Name: {type: String },
+  RestaurantId:  { type: String },
+  Recommended: Number,
   Rating: Number,
   NumberOfReviews: Number,
-  Recommended: Number,
-  RestaurantId:  { type: String },
-  Cuisine: String,
-	Name: {type: String },
-	Address: String,
 	Coordinates:  { latitude: Number, longitude: Number},
-	ZipCode: String
-}, { update: false });
+	ZipCode: String,
+	Address: String,
+  Cuisine: String,
+});
 
 module.exports =  Place

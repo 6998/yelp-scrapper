@@ -31,19 +31,19 @@ const scrape = async () => {
     arr = await yelpResults(cat);
     res = res.concat(arr.map(x => x.id));
 
-    await sleep(500);
-    //await save(arr, cat);
+    await save(arr, cat);
 
     console.log(`fetch returned ${arr.length} results`)
     console.log('')
-    
+
     break;
   }
 };
 
 const save = async (arr, cat) => {
   for (let biz of arr) {
-    saveFunc(item, cat);
+    await saveFunc(biz, cat);
+    break;
   }
 };
 
