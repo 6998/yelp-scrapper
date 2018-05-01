@@ -6,8 +6,7 @@ if(!process.env.ENV) // make sure we have env params
 const dynamoose = require('dynamoose');
 
 const Place = dynamoose.model('yelp-restaurants', {
-	id: Number,
-  id: String,
+	id: String,
 	Name: {type: String },
   RestaurantId:  { type: String },
   Recommended: Number,
@@ -17,6 +16,12 @@ const Place = dynamoose.model('yelp-restaurants', {
 	ZipCode: String,
 	Address: String,
   Cuisine: String,
+}, {
+	throughput: 5,
+	timestamps: {
+		createdAt: 'createdAtTimestamp',
+    updatedAt: 'insertedAtTimestamp'
+	}
 });
 
 module.exports =  Place

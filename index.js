@@ -40,7 +40,7 @@ id = 1
 const save = async (arr, cat) => {
   for (let b of arr) {
     await saveFunc(id++, b, cat);
-    await sleep(200)
+    await sleep(50)
   }
 };
 
